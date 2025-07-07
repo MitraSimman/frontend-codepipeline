@@ -15,6 +15,9 @@ phases:
     commands:
       - echo Deploying to S3...
       - aws s3 sync build/ s3://$S3BucketName/ --delete
+      - echo Creating CloudFront invalidation...
+      - aws cloudfront create-invalidation --distribution-id $CloudFrontDistributionId --paths "/*"
+
 
 artifacts:
   files:
